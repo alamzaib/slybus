@@ -14,7 +14,8 @@ class SyllabusController extends Controller
      */
     public function index()
     {
-        //
+        $syllabus = Syllabus::orderBy('id','desc')->paginate(5);
+        return view('syllabus.index', compact('syllabus'));
     }
 
     /**

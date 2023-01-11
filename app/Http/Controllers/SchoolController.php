@@ -14,7 +14,8 @@ class SchoolController extends Controller
      */
     public function index()
     {
-        //
+        $schools = School::orderBy('id','desc')->paginate(5);
+        return view('school.index', compact('schools'));
     }
 
     /**
@@ -24,7 +25,7 @@ class SchoolController extends Controller
      */
     public function create()
     {
-        //
+        return view('school.create');
     }
 
     /**
@@ -35,7 +36,20 @@ class SchoolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'website' => 'required',
+            'detail' => 'required',
+        ]);
+
+        School::create($request->post());
+
+        return redirect()->route('school.index')->with('success','School has been created successfully.');
     }
 
     /**
@@ -46,7 +60,7 @@ class SchoolController extends Controller
      */
     public function show(School $school)
     {
-        //
+        return view('school.show',compact('school'));
     }
 
     /**
@@ -57,7 +71,7 @@ class SchoolController extends Controller
      */
     public function edit(School $school)
     {
-        //
+        return view('school.edit',compact('school'));
     }
 
     /**
@@ -69,7 +83,20 @@ class SchoolController extends Controller
      */
     public function update(Request $request, School $school)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'country' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'website' => 'required',
+            'detail' => 'required',
+        ]);
+
+        $school->fill($request->post())->save();
+
+        return redirect()->route('school.index')->with('success','School Has Been updated successfully');
     }
 
     /**
@@ -80,6 +107,7 @@ class SchoolController extends Controller
      */
     public function destroy(School $school)
     {
-        //
+        $school->delete();
+        return redirect()->route('school.index')->with('success','School has been deleted successfully');
     }
 }

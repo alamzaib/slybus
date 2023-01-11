@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Teacher;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class TeacherController extends Controller
@@ -14,7 +15,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = Teacher::orderBy('id','desc')->paginate(5);
+        return view('teacher.index', compact('teachers'));
     }
 
     /**
@@ -24,7 +26,15 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        $schools = DB::table('school')->get();
+        $school_list = '<select name="school_id" class="form-control">
+                        <option></option>';
+        foreach ($schools as $school){
+            $school_list .= '<option value="'.$school->id.'">'.$school->name.'</option>';
+        }
+        $school_list .= '</select>';
+
+        return view('teacher.create', compact('school_list'));
     }
 
     /**
@@ -35,7 +45,15 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'bio' => 'required',
+            'school_id' => 'required',
+        ]);
+
+        Teacher::create($request->post());
+
+        return redirect()->route('teacher.index')->with('success','Teacher has been created successfully.');
     }
 
     /**
@@ -46,7 +64,7 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        //
+        return view('teacher.show',compact('teacher'));
     }
 
     /**
@@ -57,7 +75,14 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        $schools = DB::table('school')->get();
+        $school_list = '<select name="school_id" class="form-control">
+                        <option></option>';
+        foreach ($schools as $school){
+            $school_list .= '<option value="'.$school->id.'">'.$school->name.'</option>';
+        }
+        $school_list .= '</select>';
+        return view('teacher.edit',compact('teacher','school_list'));
     }
 
     /**
@@ -69,7 +94,15 @@ class TeacherController extends Controller
      */
     public function update(Request $request, Teacher $teacher)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'bio' => 'required',
+            'school_id' => 'required',
+        ]);
+
+        $teacher->fill($request->post())->save();
+
+        return redirect()->route('teacher.index')->with('success','Teacher Has Been updated successfully');
     }
 
     /**
@@ -80,6 +113,7 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->delete();
+        return redirect()->route('teacher.index')->with('success','Teacher has been deleted successfully');
     }
 }
