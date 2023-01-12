@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Add School Form</title>
+    <title>Add Topic Form</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
@@ -12,10 +12,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left mb-2">
-                <h2>Add School</h2>
+                <h2>Add Topic</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('school.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('topic.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -24,13 +24,13 @@
             {{ session('status') }}
         </div>
     @endif
-    <form action="{{ route('school.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('topic.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>School Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="School Name">
+                    <strong>Topic Name:</strong>
+                    <input type="text" name="name" class="form-control" placeholder="Topic Name">
                     @error('name')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
@@ -38,63 +38,18 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>Address:</strong>
-                    <input type="text" name="address" class="form-control" placeholder="Address">
-                    @error('address')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>City:</strong>
-                    <input type="text" name="city" class="form-control" placeholder="City">
-                    @error('city')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Country:</strong>
-                    <input type="text" name="country" class="form-control" placeholder="Country">
-                    @error('country')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Phone:</strong>
-                    <input type="text" name="phone" class="form-control" placeholder="Phone">
-                    @error('phone')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>School Email:</strong>
-                    <input type="email" name="email" class="form-control" placeholder="School Email">
-                    @error('email')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Website:</strong>
-                    <input type="text" name="website" class="form-control" placeholder="Website">
-                    @error('website')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
                     <strong>Detail:</strong>
-                    <input type="text" name="detail" class="form-control" placeholder="Detail">
+                    <textarea name="detail" class="form-control"></textarea>
                     @error('detail')
+                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Unit:</strong>
+                    {!! $unit_list  !!}
+                    @error('unit_id')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>

@@ -11,7 +11,18 @@ class Course extends Model
     protected $table = 'course';
     protected $fillable = ['name','detail','subject_id'];
 
-    public function subject(){
+    public function subject()
+    {
         return $this->belongsTo(Subject::class,'subject_id','id');
+    }
+
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
+
+    public function syllabus()
+    {
+        return $this->hasMany(Syllabus::class);
     }
 }
