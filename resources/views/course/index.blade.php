@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>School</title>
+    <title>Course</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
 </head>
 <body>
@@ -10,10 +10,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>School List</h2>
+                <h2>Course List</h2>
             </div>
             <div class="pull-right mb-2">
-                <a class="btn btn-success" href="{{ route('school.create') }}"> Create School</a>
+                <a class="btn btn-success" href="{{ route('course.create') }}"> Create Course</a>
             </div>
         </div>
     </div>
@@ -26,28 +26,22 @@
         <thead>
         <tr>
             <th>S.No</th>
-            <th>School Name</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>City</th>
-            <th>Country</th>
-            <th>Phone</th>
+            <th>Course Name</th>
+            <th>Detail</th>
+            <th>Subject</th>
             <th width="280px">Action</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($schools as $school)
+        @foreach ($courses as $course)
             <tr>
-                <td>{{ $school->id }}</td>
-                <td>{{ $school->name }}</td>
-                <td>{{ $school->email }}</td>
-                <td>{{ $school->address }}</td>
-                <td>{{ $school->city }}</td>
-                <td>{{ $school->country }}</td>
-                <td>{{ $school->phone }}</td>
+                <td>{{ $course->id }}</td>
+                <td>{{ $course->name }}</td>
+                <td>{{ $course->detail }}</td>
+                <td>{{ $course->subject->name }}</td>
                 <td>
-                    <form action="{{ route('school.destroy',$school->id) }}" method="Post">
-                        <a class="btn btn-primary" href="{{ route('school.edit',$school->id) }}">Edit</a>
+                    <form action="{{ route('course.destroy',$course->id) }}" method="Post">
+                        <a class="btn btn-primary" href="{{ route('course.edit',$course->id) }}">Edit</a>
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -57,7 +51,7 @@
         @endforeach
         </tbody>
     </table>
-    {!! $schools->links() !!}
+    {!! $courses->links() !!}
 </div>
 </body>
 </html>

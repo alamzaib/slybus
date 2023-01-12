@@ -67,7 +67,7 @@
                 <div class="form-group">
                     <strong>School:</strong>
                     {!! $school_list  !!}
-                    @error('school')
+                    @error('school_id')
                     <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                     @enderror
                 </div>
