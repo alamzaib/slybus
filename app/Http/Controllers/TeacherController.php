@@ -48,6 +48,8 @@ class TeacherController extends Controller
         $request->validate([
             'name' => 'required',
             'bio' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
             'school_id' => 'required',
         ]);
 
@@ -79,7 +81,9 @@ class TeacherController extends Controller
         $school_list = '<select name="school_id" class="form-control">
                         <option></option>';
         foreach ($schools as $school){
-            $school_list .= '<option value="'.$school->id.'">'.$school->name.'</option>';
+            $school_list .= "<option value='".$school->id."'";
+            $school_list .= ($teacher->school->id == $school->id)?" selected ": "";
+            $school_list .= ">".$school->name."</option>";
         }
         $school_list .= '</select>';
         return view('teacher.edit',compact('teacher','school_list'));
@@ -97,6 +101,8 @@ class TeacherController extends Controller
         $request->validate([
             'name' => 'required',
             'bio' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
             'school_id' => 'required',
         ]);
 

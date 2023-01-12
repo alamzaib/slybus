@@ -42,7 +42,7 @@
                 <td>{{ $teacher->bio }}</td>
                 <td>{{ $teacher->email }}</td>
                 <td>{{ $teacher->phone }}</td>
-                <td>{{ $teacher->school_id }}</td>
+                <td>{{ $teacher->school->name }}</td>
                 <td>
                     <form action="{{ route('teacher.destroy',$teacher->id) }}" method="Post">
                         <a class="btn btn-primary" href="{{ route('teacher.edit',$teacher->id) }}">Edit</a>

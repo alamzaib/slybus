@@ -11,4 +11,9 @@ class School extends Model
     protected $table = 'school';
     protected $fillable = ['name', 'address', 'city', 'country' , 'phone' , 'email' , 'website' , 'detail'];
 
+    public function teachers()
+    {
+        return $this->hasMany(Teacher::class,'id','school_id');
+    }
+
 }

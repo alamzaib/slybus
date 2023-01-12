@@ -11,4 +11,8 @@ class Teacher extends Model
     protected $table = 'teacher';
     protected $fillable = ['school_id','name', 'bio', 'email','phone','photo'];
 
+    public function school(){
+        return $this->belongsTo(School::class);
+    }
+
 }
